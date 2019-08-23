@@ -28,13 +28,10 @@ public class Main {
 
             String part2 = "{\"SHA256\":\"" + result + "\"}";
 
-            System.out.println(part2);
-
             String encodedURL = Base64.getEncoder().encodeToString(part2.getBytes());
             encodedURL = encodedURL.replaceAll("\\+", "-");
             encodedURL = encodedURL.replaceAll("/", "_");
             encodedURL = encodedURL.replaceAll("=", "");
-
 
             System.out.println("payload: \n" + encodedURL);
 
@@ -84,7 +81,7 @@ public class Main {
             signedSignature = signedSignature.replaceAll("/", "_");
             signedSignature = signedSignature.replaceAll("=", "");
 
-            System.out.println("JWS-signature: ");
+            System.out.println("JWS-signature (the result): ");
             String signature = signatureConcatenation + "." + signedSignature;
             System.out.println(signature);
 
@@ -104,9 +101,9 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        //PLEASE INSERT JSON PAYLOAD BELOW
-        String payload = "{\"headers\":{\"Branch-Location\":\"RO\",\"X-Request-ID\":\"b7d96357-b320-4f54-bb02-1c4511e4b772\",\"PSU-IP-Address\":\"127.0.0.1\"},\"payload\":{\"endToEndIdentification\":\"test\",\"instructedAmount\":{\"currency\":\"RON\",\"amount\":\"101\"},\"creditorAccount\":{\"iban\":\"RO61TREZ27A660404200109X\"},\"creditorName\":\"PaySafe\"}}";
-       // payload = "{\"headers\":{\"Branch-Location\":\"RO\",\"X-Request-ID\":\"35ffcd8e-3453-4dcc-a6cc-c74ea2344822\"},\"payload\":{\"access\":{\"balances\":[],\"transactions\":[]},\"recurringIndicator\":true,\"validUntil\":\"2019-11-01\",\"frequencyPerDay\":\"4\"}}";
+        // INSERT JSON PAYLOAD BELOW
+        //(current String already has a JSON content as an example)
+        String payload = "{\"headers\":{},\"payload\":{\"payment_id\":\"c806a400-4671-4ee9-b712-d45262df6d1b\",\"scope\":\"payment\",\"response_type\":\"code\",\"state\":\"state\",\"client_id\":\"LrcL4ywuHuLtyf34g40LNf14RFfDJ4SL\"}}";
         signatureGenerator(payload);
     }
 }
